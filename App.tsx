@@ -1,13 +1,13 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { InventoryTable } from './components/InventoryTable';
 import { ThemeToggle } from './components/ThemeToggle';
 import { GITHUB_JSON_URL, MOCK_INVENTORY_DATA } from './constants';
 import { InventoryData } from './types';
 import { locales, Language } from './locales';
 
-// Polling interval in milliseconds (e.g., 10 seconds)
-const POLLING_INTERVAL = 10000;
+// Polling interval in milliseconds (e.g., 30 seconds)
+const POLLING_INTERVAL = 30000;
 
 /**
  * Custom hook to fetch and manage inventory data.
@@ -15,7 +15,7 @@ const POLLING_INTERVAL = 10000;
  * and handles loading and error states gracefully.
  * In case of an initial fetch error, it falls back to mock data.
  * It also uses the Page Visibility API to stop polling when the tab is not active.
- * @returns An object containing the inventory data, loading state, and any error messages.
+ * @returns An object containing the inventory data, loading state, any error messages, and the fetch function.
  */
 const useInventoryData = () => {
   const [data, setData] = useState<InventoryData | null>(null);
@@ -24,7 +24,7 @@ const useInventoryData = () => {
   const isInitialLoad = useRef(true);
   const intervalId = useRef<number | null>(null);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     // On subsequent fetches, don't clear data, just the error.
     // This prevents the UI from flashing if a poll fails but we have old data.
     if (!isInitialLoad.current) {
@@ -54,15 +54,15 @@ const useInventoryData = () => {
         isInitialLoad.current = false;
       }
     }
-  };
+  }, []);
 
-  const startPolling = () => {
+  const startPolling = useCallback(() => {
     // Clear any existing interval before starting a new one
     if (intervalId.current) {
       clearInterval(intervalId.current);
     }
     intervalId.current = window.setInterval(fetchData, POLLING_INTERVAL);
-  };
+  }, [fetchData]);
 
   const stopPolling = () => {
     if (intervalId.current) {
@@ -96,9 +96,9 @@ const useInventoryData = () => {
       stopPolling();
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, []); // Empty dependency array ensures this effect runs only once
+  }, [fetchData, startPolling]);
 
-  return { data, loading, error };
+  return { data, loading, error, fetchData };
 };
 
 /**
@@ -164,11 +164,13 @@ const App: React.FC = () => {
                 </h1>
                 {data && <p className="text-base text-gray-500 dark:text-gray-400 whitespace-nowrap">{locales.lastUpdated[language]}: {data.lastUpdated}</p>}
             </div>
-            <ThemeToggle 
-              theme={theme} 
-              toggleTheme={toggleTheme} 
-              labels={{ light: locales.themeToggle.light[language], dark: locales.themeToggle.dark[language] }}
-            />
+            <div className="flex items-center space-x-2">
+                <ThemeToggle 
+                  theme={theme} 
+                  toggleTheme={toggleTheme} 
+                  labels={{ light: locales.themeToggle.light[language], dark: locales.themeToggle.dark[language] }}
+                />
+            </div>
         </div>
       </header>
 
@@ -178,11 +180,12 @@ const App: React.FC = () => {
             <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-purple-500"></div>
           </div>
         )}
+        {error && !data && <p className="text-center text-red-500">{`Error: ${error}`}</p>}
         {data && !loading && <InventoryTable data={data} language={language} />}
         {data && !loading && (
             <div className="mt-8 text-center max-w-5xl mx-auto space-y-3">
                 <p className="text-base text-gray-500 dark:text-gray-400">
-                ※販売状況の反映にはお時間がかかる場合もございますので、予めご了承ください
+                ※販売状況の反映にはお時間がかかる場合もございますので、予めご了承ください。
                 </p>
             </div>
         )}

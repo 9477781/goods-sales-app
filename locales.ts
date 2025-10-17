@@ -1,3 +1,4 @@
+
 import { ProductStatus } from './types';
 
 export type Language = 'ja';
@@ -30,6 +31,9 @@ export const locales = {
   },
   clearSelection: {
     ja: '選択をクリア',
+  },
+  refreshData: {
+    ja: 'データを更新',
   },
 };
 
