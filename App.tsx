@@ -32,8 +32,10 @@ const useInventoryData = () => {
     }
 
     try {
-      // Add a cache-busting query parameter to ensure fresh data is fetched
-      const response = await fetch(`${GITHUB_JSON_URL}?t=${new Date().getTime()}`);
+      // Add a cache-busting query parameter and a no-cache option for robust fetching
+      const response = await fetch(`${GITHUB_JSON_URL}?t=${new Date().getTime()}`, {
+        cache: 'no-cache',
+      });
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
