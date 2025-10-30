@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { InventoryTable } from './components/InventoryTable';
 import { ThemeToggle } from './components/ThemeToggle';
@@ -185,29 +184,37 @@ const App: React.FC = () => {
         )}
         {error && !data && <p className="text-center text-red-500">{`Error: ${error}`}</p>}
         {data && !loading && <InventoryTable data={data} language={language} />}
-        {data && !loading && (
-            <div className="mt-8 text-center max-w-5xl mx-auto space-y-3">
-                <p className="text-base text-gray-500 dark:text-gray-400">
-                ※販売状況の反映にはお時間がかかる場合もございますので、予めご了承ください。
-                </p>
-            </div>
-        )}
       </main>
 
       <footer className="w-full max-w-7xl pt-6 border-t border-gray-200 dark:border-gray-700 mt-8 transition-colors duration-300">
-        <div className="flex justify-start items-center">
-            {data?.backUrl && (
-              <a
-                  href={data.backUrl}
-                  className="flex items-center space-x-2 px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-semibold rounded-lg shadow-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-900"
-                  aria-label={locales.goBack[language]}
-              >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clipRule="evenodd" />
-                  </svg>
-                  <span>{locales.goBack[language]}</span>
-              </a>
-            )}
+        <div className="grid grid-cols-3 items-center">
+            <div className="justify-self-start">
+              {data?.backUrl && (
+                <a
+                    href={data.backUrl}
+                    className="flex items-center space-x-2 px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-semibold rounded-lg shadow-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-900"
+                    aria-label={locales.goBack[language]}
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clipRule="evenodd" />
+                    </svg>
+                    <span>{locales.goBack[language]}</span>
+                </a>
+              )}
+            </div>
+
+            <div className="justify-self-center text-center">
+                {data && !loading && (
+                    <p className="text-base text-gray-500 dark:text-gray-400">
+                    ※販売状況の反映にはお時間がかかる場合がございます。
+                    <br />
+                    予めご了承ください。
+                    </p>
+                )}
+            </div>
+
+            {/* Empty div for balancing the grid */}
+            <div></div>
         </div>
       </footer>
     </div>
