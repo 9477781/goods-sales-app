@@ -1,4 +1,3 @@
-
 import { ProductStatus } from './types';
 
 export type Language = 'ja';
@@ -43,5 +42,8 @@ export const statusTranslations: Record<ProductStatus, Record<Language, string>>
   },
   [ProductStatus.SoldOut]: {
     ja: 'SOLD OUT',
+  },
+  [ProductStatus.BeforeSale]: {
+    ja: '販売前',
   },
 };

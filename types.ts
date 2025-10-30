@@ -1,6 +1,7 @@
 export enum ProductStatus {
   SoldOut = 'SOLD OUT',
   InStock = '販売中',
+  BeforeSale = '販売前',
 }
 
 export interface Store {

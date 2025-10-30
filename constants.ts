@@ -7,84 +7,42 @@ export const GITHUB_JSON_URL = 'https://raw.githubusercontent.com/9477781/goods-
 // Fallback data used when the fetch from GITHUB_JSON_URL fails.
 // This allows the UI to be displayed with sample data for development purposes.
 export const MOCK_INVENTORY_DATA: InventoryData = {
-  products: ["アクリルスタンド", "缶バッジ", "クリアファイル", "Tシャツ", "ジオラマアクリルスタンド", "トレーディングメタリック缶バッチ", "バーマット", "トレーディングキーホルダー"],
+  products: [
+    "アクリルスタンド\n井芹 仁菜",
+    "アクリルスタンド\n河原木 桃花",
+    "アクリルスタンド\n安和 すばる",
+    "コラボロゴTシャツ",
+    "コラボロゴパイントグラス"
+  ],
   stores: [
     {
-      name: "HUB秋葉原店",
+      name: "HUB川崎店",
       status: {
-        "アクリルスタンド": ProductStatus.InStock,
-        "缶バッジ": ProductStatus.SoldOut,
-        "クリアファイル": ProductStatus.InStock,
-        "Tシャツ": ProductStatus.SoldOut,
-        "ジオラマアクリルスタンド": ProductStatus.InStock,
-        "トレーディングメタリック缶バッチ": ProductStatus.SoldOut,
-        "バーマット": ProductStatus.InStock,
-        "トレーディングキーホルダー": ProductStatus.InStock,
+        "アクリルスタンド\n井芹 仁菜": ProductStatus.SoldOut,
+        "アクリルスタンド\n河原木 桃花": ProductStatus.InStock,
+        "アクリルスタンド\n安和 すばる": ProductStatus.BeforeSale,
+        "コラボロゴTシャツ": ProductStatus.InStock,
+        "コラボロゴパイントグラス": ProductStatus.BeforeSale,
       }
     },
     {
       name: "HUB池袋西口公園前店",
       status: {
-        "アクリルスタンド": ProductStatus.SoldOut,
-        "缶バッジ": ProductStatus.SoldOut,
-        "クリアファイル": ProductStatus.InStock,
-        "Tシャツ": ProductStatus.InStock,
-        "ジオラマアクリルスタンド": ProductStatus.SoldOut,
-        "トレーディングメタリック缶バッチ": ProductStatus.InStock,
-        "バーマット": ProductStatus.SoldOut,
-        "トレーディングキーホルダー": ProductStatus.InStock,
+        "アクリルスタンド\n井芹 仁菜": ProductStatus.InStock,
+        "アクリルスタンド\n河原木 桃花": ProductStatus.SoldOut,
+        "アクリルスタンド\n安和 すばる": ProductStatus.InStock,
+        "コラボロゴTシャツ": ProductStatus.SoldOut,
+        "コラボロゴパイントグラス": ProductStatus.BeforeSale,
       }
     },
     {
       name: "HUB新宿区役所通り店",
       status: {
-        "アクリルスタンド": ProductStatus.InStock,
-        "缶バッジ": ProductStatus.InStock,
-        "クリアファイル": ProductStatus.InStock,
-        "Tシャツ": ProductStatus.InStock,
-        "ジオラマアクリルスタンド": ProductStatus.InStock,
-        "トレーディングメタリック缶バッチ": ProductStatus.InStock,
-        "バーマット": ProductStatus.InStock,
-        "トレーディングキーホルダー": ProductStatus.InStock,
-      }
-    },
-    {
-      name: "HUB仙台一番町四丁目店",
-      status: {
-        "アクリルスタンド": ProductStatus.SoldOut,
-        "缶バッジ": ProductStatus.InStock,
-        "クリアファイル": ProductStatus.SoldOut,
-        "Tシャツ": ProductStatus.InStock,
-        "ジオラマアクリルスタンド": ProductStatus.SoldOut,
-        "トレーディングメタリック缶バッチ": ProductStatus.SoldOut,
-        "バーマット": ProductStatus.InStock,
-        "トレーディングキーホルダー": ProductStatus.InStock,
-      }
-    },
-    {
-      name: "HUB名古屋栄錦通り店",
-      status: {
-        "アクリルスタンド": ProductStatus.InStock,
-        "缶バッジ": ProductStatus.InStock,
-        "クリアファイル": ProductStatus.InStock,
-        "Tシャツ": ProductStatus.SoldOut,
-        "ジオラマアクリルスタンド": ProductStatus.InStock,
-        "トレーディングメタリック缶バッチ": ProductStatus.InStock,
-        "バーマット": ProductStatus.SoldOut,
-        "トレーディングキーホルダー": ProductStatus.SoldOut,
-      }
-    },
-    {
-      name: "HUB LINKS UMEDA店",
-      status: {
-        "アクリルスタンド": ProductStatus.SoldOut,
-        "缶バッジ": ProductStatus.SoldOut,
-        "クリアファイル": ProductStatus.SoldOut,
-        "Tシャツ": ProductStatus.SoldOut,
-        "ジオラマアクリルスタンド": ProductStatus.InStock,
-        "トレーディングメタリック缶バッチ": ProductStatus.InStock,
-        "バーマット": ProductStatus.InStock,
-        "トレーディングキーホルダー": ProductStatus.InStock,
+        "アクリルスタンド\n井芹 仁菜": ProductStatus.InStock,
+        "アクリルスタンド\n河原木 桃花": ProductStatus.InStock,
+        "アクリルスタンド\n安和 すばる": ProductStatus.InStock,
+        "コラボロゴTシャツ": ProductStatus.InStock,
+        "コラボロゴパイントグラス": ProductStatus.InStock,
       }
     },
   ],

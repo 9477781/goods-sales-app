@@ -68,7 +68,7 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({ data, language }
                               {locales.storeName[language]}
                           </th>
                           {productsToDisplay.map((product) => (
-                              <th key={product} scope="col" className="py-4 px-4 text-center text-lg font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider min-w-[10rem]">
+                              <th key={product} scope="col" className="py-4 px-4 text-center text-lg font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider min-w-[10rem] whitespace-pre-line">
                                   {product}
                               </th>
                           ))}

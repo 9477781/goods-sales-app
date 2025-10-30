@@ -114,7 +114,7 @@ export const ProductSelector: React.FC<ProductSelectorProps> = ({
                   checked={selectedProducts.includes(product)}
                   onChange={() => handleToggle(product)}
                 />
-                <span className="ml-3">{product}</span>
+                <span className="ml-3 whitespace-pre-line">{product}</span>
               </label>
             ))}
           </div>
