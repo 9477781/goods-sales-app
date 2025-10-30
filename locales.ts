@@ -1,3 +1,4 @@
+
 import { ProductStatus } from './types';
 
 export type Language = 'ja';
@@ -33,6 +34,22 @@ export const locales = {
   },
   refreshData: {
     ja: 'データを更新',
+  },
+  // FIX: Add missing locale strings for the settings modal.
+  settings: {
+    ja: '設定',
+  },
+  settingsDescription: {
+    ja: 'データソースURLなどの設定を変更します。',
+  },
+  dataSourceUrl: {
+    ja: 'データソースURL',
+  },
+  cancel: {
+    ja: 'キャンセル',
+  },
+  save: {
+    ja: '保存',
   },
 };
 

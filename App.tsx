@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { InventoryTable } from './components/InventoryTable';
 import { ThemeToggle } from './components/ThemeToggle';
@@ -17,7 +18,7 @@ const POLLING_INTERVAL = 30000;
  * It also uses the Page Visibility API to stop polling when the tab is not active.
  * @returns An object containing the inventory data, loading state, any error messages, and the fetch function.
  */
-const useInventoryData = () => {
+const useInventoryData = (url: string) => {
   const [data, setData] = useState<InventoryData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -33,7 +34,7 @@ const useInventoryData = () => {
 
     try {
       // Add a cache-busting query parameter and a no-cache option for robust fetching
-      const response = await fetch(`${GITHUB_JSON_URL}?t=${new Date().getTime()}`, {
+      const response = await fetch(`${url}?t=${new Date().getTime()}`, {
         cache: 'no-cache',
       });
       if (!response.ok) {
@@ -56,7 +57,7 @@ const useInventoryData = () => {
         isInitialLoad.current = false;
       }
     }
-  }, []);
+  }, [url]);
 
   const startPolling = useCallback(() => {
     // Clear any existing interval before starting a new one
@@ -98,7 +99,7 @@ const useInventoryData = () => {
       stopPolling();
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, [fetchData, startPolling]);
+  }, [fetchData, startPolling, url]);
 
   return { data, loading, error, fetchData };
 };
@@ -147,7 +148,7 @@ const useTheme = () => {
  * @returns The root JSX element for the application.
  */
 const App: React.FC = () => {
-  const { data, loading, error } = useInventoryData();
+  const { data, loading, error } = useInventoryData(GITHUB_JSON_URL);
   const { theme, toggleTheme } = useTheme();
   const language: Language = 'ja';
 
@@ -160,11 +161,11 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 flex flex-col items-center p-4 sm:p-6 md:p-8 transition-colors duration-300">
       <header className="w-full max-w-7xl mb-8">
         <div className="flex justify-between items-center">
-            <div className="flex items-baseline space-x-6">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600">
+            <div className="flex flex-col sm:flex-row sm:items-baseline sm:space-x-6">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600 order-2 sm:order-1">
                 {locales.headerTitle[language]}
                 </h1>
-                {data && <p className="text-base text-gray-500 dark:text-gray-400 whitespace-nowrap">{locales.lastUpdated[language]}: {data.lastUpdated}</p>}
+                {data && <p className="text-base text-gray-500 dark:text-gray-400 whitespace-nowrap order-1 sm:order-2">{locales.lastUpdated[language]}: {data.lastUpdated}</p>}
             </div>
             <div className="flex items-center space-x-2">
                 <ThemeToggle 
@@ -195,16 +196,18 @@ const App: React.FC = () => {
 
       <footer className="w-full max-w-7xl pt-6 border-t border-gray-200 dark:border-gray-700 mt-8 transition-colors duration-300">
         <div className="flex justify-start items-center">
-            <button
-                onClick={() => window.history.back()}
-                className="flex items-center space-x-2 px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-semibold rounded-lg shadow-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-900"
-                aria-label={locales.goBack[language]}
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clipRule="evenodd" />
-                </svg>
-                <span>{locales.goBack[language]}</span>
-            </button>
+            {data?.backUrl && (
+              <a
+                  href={data.backUrl}
+                  className="flex items-center space-x-2 px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-semibold rounded-lg shadow-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-900"
+                  aria-label={locales.goBack[language]}
+              >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clipRule="evenodd" />
+                  </svg>
+                  <span>{locales.goBack[language]}</span>
+              </a>
+            )}
         </div>
       </footer>
     </div>

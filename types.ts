@@ -15,4 +15,5 @@ export interface InventoryData {
   products: string[];
   stores: Store[];
   lastUpdated: string;
+  backUrl?: string;
 }
