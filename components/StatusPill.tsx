@@ -22,7 +22,7 @@ export const StatusPill: React.FC<StatusPillProps> = ({ status, language }) => {
     }
   };
 
-  const baseClasses = 'w-28 text-center py-2 px-3 rounded-full text-base font-bold shadow-sm transition-transform transform hover:scale-105 border';
+  const baseClasses = 'w-24 text-center py-2 px-3 rounded-full text-sm font-bold shadow-sm transition-transform transform hover:scale-105 border';
 
   return (
     <div className={`${baseClasses} ${getStatusClasses()} transition-colors duration-300`}>

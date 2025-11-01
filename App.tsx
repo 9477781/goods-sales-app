@@ -187,8 +187,8 @@ const App: React.FC = () => {
       </main>
 
       <footer className="w-full max-w-7xl pt-6 border-t border-gray-200 dark:border-gray-700 mt-8 transition-colors duration-300">
-        <div className="grid grid-cols-3 items-center">
-            <div className="justify-self-start">
+        <div className="grid grid-cols-1 sm:grid-cols-3 items-center">
+            <div className="justify-self-start order-2 sm:order-1 mt-4 sm:mt-0">
               {data?.backUrl && (
                 <a
                     href={data.backUrl}
@@ -203,18 +203,23 @@ const App: React.FC = () => {
               )}
             </div>
 
-            <div className="justify-self-center text-center">
+            <div className="order-1 sm:order-2 text-left sm:justify-self-center sm:text-center">
                 {data && !loading && (
-                    <p className="text-base text-gray-500 dark:text-gray-400">
-                    ※販売状況の反映にはお時間がかかる場合がございます。
-                    <br />
-                    予めご了承ください。
-                    </p>
+                    <>
+                        <p className="sm:hidden text-base text-gray-500 dark:text-gray-400">
+                            {'※販売状況の反映にはお時間がかかる場合がございます。予めご了承ください。'}
+                        </p>
+                        <p className="hidden sm:block text-base text-gray-500 dark:text-gray-400">
+                            {'※販売状況の反映にはお時間がかかる場合がございます。'}
+                            <br />
+                            {'予めご了承ください。'}
+                        </p>
+                    </>
                 )}
             </div>
 
             {/* Empty div for balancing the grid */}
-            <div></div>
+            <div className="hidden sm:block order-3"></div>
         </div>
       </footer>
     </div>

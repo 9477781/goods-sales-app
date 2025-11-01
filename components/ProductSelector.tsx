@@ -90,14 +90,14 @@ export const ProductSelector: React.FC<ProductSelectorProps> = ({
           <div className="py-1 max-h-60 overflow-y-auto" role="none">
             <button
                 onClick={handleSelectAll}
-                className="w-full text-left px-4 py-2 text-sm text-indigo-600 dark:text-indigo-400 hover:bg-gray-100 dark:hover:bg-gray-600 font-medium"
+                className="w-full text-left px-4 py-2 text-base text-indigo-600 dark:text-indigo-400 hover:bg-gray-100 dark:hover:bg-gray-600 font-medium"
                 role="menuitem"
               >
                 {locales.selectAll[language]}
               </button>
             <button
                 onClick={handleClear}
-                className="w-full text-left px-4 py-2 text-sm text-indigo-600 dark:text-indigo-400 hover:bg-gray-100 dark:hover:bg-gray-600 font-medium"
+                className="w-full text-left px-4 py-2 text-base text-indigo-600 dark:text-indigo-400 hover:bg-gray-100 dark:hover:bg-gray-600 font-medium"
                 role="menuitem"
               >
                 {locales.clearSelection[language]}
@@ -106,11 +106,11 @@ export const ProductSelector: React.FC<ProductSelectorProps> = ({
             {allProducts.map((product) => (
               <label
                 key={product}
-                className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
+                className="flex items-center px-4 py-2 text-base text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
               >
                 <input
                   type="checkbox"
-                  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                  className="h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                   checked={selectedProducts.includes(product)}
                   onChange={() => handleToggle(product)}
                 />
