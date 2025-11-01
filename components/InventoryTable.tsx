@@ -68,7 +68,7 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({ data, language }
                               {locales.storeName[language]}
                           </th>
                           {productsToDisplay.map((product) => (
-                              <th key={product} scope="col" className="py-4 px-4 text-center text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider min-w-[10rem] whitespace-pre-line">
+                              <th key={product} scope="col" className="py-4 px-4 text-center text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider min-w-[9rem] whitespace-pre-line">
                                   {product}
                               </th>
                           ))}
@@ -77,7 +77,7 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({ data, language }
                   <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                       {stores.map((store) => (
                           <tr key={store.name} className="group">
-                              <td className="py-4 px-4 text-base font-medium text-gray-900 dark:text-gray-100 sticky left-0 z-10 bg-white dark:bg-gray-800 group-hover:bg-gray-50 dark:group-hover:bg-gray-700/50 transition-colors duration-200 min-w-[10rem] md:min-w-[12rem]">
+                              <td className="py-4 px-4 text-sm font-medium text-gray-900 dark:text-gray-100 sticky left-0 z-10 bg-white dark:bg-gray-800 group-hover:bg-gray-50 dark:group-hover:bg-gray-700/50 transition-colors duration-200 min-w-[10rem] md:min-w-[12rem]">
                                   <div className="md:whitespace-nowrap">{store.name}</div>
                               </td>
                               {productsToDisplay.map((product) => (
