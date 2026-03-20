@@ -118,50 +118,43 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({ data, language }
             </div>
 
             {/* Desktop Table (hidden md:block) */}
-            <div className="hidden md:block overflow-x-auto pb-6">
+            <div className="hidden md:block overflow-auto max-h-[70vh] pb-6" style={{ scrollbarGutter: 'stable' }}>
               <div className="min-w-max">
-                {/* Header Table */}
-                <table className="min-w-full text-left border-collapse table-fixed">
+                <table className="min-w-full text-left border-separate border-spacing-0 table-fixed">
                   <thead>
-                    <tr className="border-y-[2px] border-[#692020] dark:border-[#A04040] relative bg-[#F7F2E6] dark:bg-[#1A1211]">
-                      <th scope="col" className="py-4 px-4 font-serif font-black text-sm md:text-lg text-[#4A1E1E] dark:text-[#D4A3A3] uppercase tracking-widest w-[10rem] md:w-[14rem] min-w-[10rem] md:min-w-[14rem] max-w-[16rem] sticky left-0 z-50 bg-[#F7F2E6] dark:bg-[#1A1211]">
+                    <tr>
+                      <th scope="col" className="py-4 px-4 font-serif font-black text-sm md:text-lg text-[#4A1E1E] dark:text-[#D4A3A3] uppercase tracking-widest w-[10rem] md:w-[14rem] min-w-[10rem] md:min-w-[14rem] max-w-[16rem] sticky top-0 left-0 z-50 bg-[#F7F2E6] dark:bg-[#1A1211] border-y-[2px] border-[#692020] dark:border-[#A04040]">
                         {locales.storeName[language]}
                       </th>
                       {productsToDisplay.map((product) => (
-                        <th key={product} scope="col" className="py-4 px-4 font-serif font-black text-sm md:text-lg text-[#4A1E1E] dark:text-[#D4A3A3] uppercase tracking-widest w-[10rem] min-w-[10rem] whitespace-pre-line text-center bg-[#F7F2E6] dark:bg-[#1A1211]">
+                        <th key={product} scope="col" className="py-4 px-4 font-serif font-black text-sm md:text-lg text-[#4A1E1E] dark:text-[#D4A3A3] uppercase tracking-widest w-[10rem] min-w-[10rem] whitespace-pre-line text-center sticky top-0 z-40 bg-[#F7F2E6] dark:bg-[#1A1211] border-y-[2px] border-[#692020] dark:border-[#A04040]">
                           {product}
                         </th>
                       ))}
                     </tr>
                   </thead>
+                  <tbody>
+                    {storesToDisplay.map((store) => (
+                      <tr key={store.name} className="group hover:bg-[#F0E6D2] dark:hover:bg-[#2C1F1D] transition-colors duration-400">
+                        <td className="py-6 px-4 font-serif font-bold text-[#4A1E1E] dark:text-[#EAEAEA] sticky left-0 z-20 bg-[#F7F2E6] dark:bg-[#1A1211] group-hover:bg-[#F0E6D2] dark:group-hover:bg-[#2C1F1D] w-[10rem] md:w-[14rem] min-w-[10rem] md:min-w-[14rem] max-w-[16rem] text-sm md:text-lg tracking-wide transition-colors duration-400 border-b-[1.5px] border-[#692020] dark:border-[#A04040]">
+                          {store.name}
+                        </td>
+                        {productsToDisplay.map((product) => (
+                          <td key={`${store.name}-${product}`} className="py-6 px-4 text-center align-middle w-[10rem] min-w-[10rem] border-b-[1.5px] border-[#692020] dark:border-[#A04040]">
+                            <StatusPill status={store.status[product]} language={language} />
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                    {(productsToDisplay.length === 0 || storesToDisplay.length === 0) && allStoresData.length > 0 && (
+                      <tr>
+                        <td colSpan={1 + productsToDisplay.length} className="text-center py-16 text-[#692020] dark:text-[#A04040] font-serif italic text-lg tracking-wider bg-[#F7F2E6] dark:bg-[#1A1211]">
+                          表示する項目を選択してください。
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
                 </table>
-
-                {/* Body Container with Vertical Scroll */}
-                <div className="max-h-[70vh] overflow-y-auto" style={{ scrollbarGutter: 'stable' }}>
-                  <table className="min-w-full text-left border-collapse table-fixed">
-                    <tbody className="divide-y-[1.5px] divide-[#692020] dark:divide-[#A04040]">
-                      {storesToDisplay.map((store) => (
-                        <tr key={store.name} className="group relative hover:bg-[#F0E6D2] dark:hover:bg-[#2C1F1D] transition-colors duration-400">
-                          <td className="py-6 px-4 font-serif font-bold text-[#4A1E1E] dark:text-[#EAEAEA] sticky left-0 z-20 bg-[#F7F2E6] dark:bg-[#1A1211] group-hover:bg-[#F0E6D2] dark:group-hover:bg-[#2C1F1D] w-[10rem] md:w-[14rem] min-w-[10rem] md:min-w-[14rem] max-w-[16rem] text-sm md:text-lg tracking-wide transition-colors duration-400">
-                            {store.name}
-                          </td>
-                          {productsToDisplay.map((product) => (
-                            <td key={`${store.name}-${product}`} className="py-6 px-4 text-center align-middle relative w-[10rem] min-w-[10rem]">
-                              <StatusPill status={store.status[product]} language={language} />
-                            </td>
-                          ))}
-                        </tr>
-                      ))}
-                      {(productsToDisplay.length === 0 || storesToDisplay.length === 0) && allStoresData.length > 0 && (
-                        <tr>
-                          <td colSpan={1 + productsToDisplay.length} className="text-center py-16 text-[#692020] dark:text-[#A04040] font-serif italic text-lg tracking-wider">
-                            表示する項目を選択してください。
-                          </td>
-                        </tr>
-                      )}
-                    </tbody>
-                  </table>
-                </div>
               </div>
             </div>
           </div>
