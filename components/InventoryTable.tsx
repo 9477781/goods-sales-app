@@ -42,7 +42,7 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({ data, language }
 
   return (
     <div className="flex flex-col animate-fade-in items-center w-full">
-      <div className="mb-8 w-full flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 px-4">
+      <div className="mb-8 w-full flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 px-4 relative z-[60]">
         <div className="w-full max-w-xs md:max-w-sm">
           <StoreSelector
             allStores={allStoresData.map(s => s.name)}
