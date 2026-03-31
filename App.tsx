@@ -220,7 +220,13 @@ const App: React.FC = () => {
           <div>
             {(data?.backUrl || true) && (
               <button
-                onClick={() => window.history.back()}
+                onClick={() => {
+                  if (data?.backUrl) {
+                    window.location.href = data.backUrl;
+                  } else {
+                    window.history.back();
+                  }
+                }}
                 className="flex items-center space-x-2 px-6 py-3 md:px-8 md:py-4 bg-indigo-500 hover:bg-indigo-600 text-white text-lg md:text-xl font-bold rounded-xl shadow-lg transform hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-900"
                 aria-label={locales.goBack[language]}
               >
