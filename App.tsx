@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import { InventoryTable } from "./components/InventoryTable";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { GITHUB_JSON_URL, MOCK_INVENTORY_DATA } from "./constants";
@@ -264,6 +265,7 @@ const App: React.FC = () => {
         currentUrl={dataSourceUrl}
         language={language}
       />
+      <Analytics />
     </div>
   );
 };
