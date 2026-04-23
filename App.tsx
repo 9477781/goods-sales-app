@@ -6,6 +6,8 @@ import { InventoryData } from "./types";
 import { locales, Language } from "./locales";
 import { SettingsIcon } from "./components/icons/SettingsIcon";
 import { SettingsModal } from "./components/SettingsModal";
+import { Analytics } from "@vercel/analytics/react";
+
 
 // Polling interval in milliseconds (e.g., 30 seconds)
 const POLLING_INTERVAL = 30000;
@@ -264,6 +266,7 @@ const App: React.FC = () => {
         currentUrl={dataSourceUrl}
         language={language}
       />
+      <Analytics />
     </div>
   );
 };
