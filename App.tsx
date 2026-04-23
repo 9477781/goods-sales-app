@@ -186,13 +186,15 @@ const App: React.FC = () => {
             {data && <p className="text-xl md:text-2xl text-[#692020] dark:text-[#A04040] font-black whitespace-nowrap order-1 sm:order-2 tracking-tight">{locales.lastUpdated[language]}: {data.lastUpdated}</p>}
           </div>
           <div className="flex items-center space-x-2">
-            <button
-              onClick={() => setIsSettingsOpen(true)}
-              className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-900 transition-colors"
-              aria-label={locales.settings[language]}
-            >
-              <SettingsIcon />
-            </button>
+            {new URLSearchParams(window.location.search).get('admin') === 'true' && (
+              <button
+                onClick={() => setIsSettingsOpen(true)}
+                className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-900 transition-colors"
+                aria-label={locales.settings[language]}
+              >
+                <SettingsIcon />
+              </button>
+            )}
             <ThemeToggle
               theme={theme}
               toggleTheme={toggleTheme}
