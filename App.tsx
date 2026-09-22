@@ -253,9 +253,24 @@ const App: React.FC = () => {
 
           <div className="flex-1">
             {data && (
-              <p className="text-lg md:text-xl font-medium text-gray-700 dark:text-gray-300 leading-relaxed">
-                ※販売状況の反映にはお時間がかかる場合がございます。予めご了承ください。
-              </p>
+              <div className="text-lg md:text-xl font-medium text-gray-700 dark:text-gray-300 leading-relaxed">
+                <p>
+                  ※販売状況の反映にはお時間がかかる場合がございます。予めご了承ください。
+                </p>
+                <p className="mt-2">
+                  ※コラボグッズはオンラインサイトでも販売中です。オンライン限定アイテムもございますので、ぜひあわせてご覧ください。
+                  <br />
+                  オンラインサイトはこちら
+                  <a
+                    href="https://goods.onesheen.jp/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="ml-1 text-indigo-600 underline hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300"
+                  >
+                    https://goods.onesheen.jp/
+                  </a>
+                </p>
+              </div>
             )}
           </div>
         </div>
